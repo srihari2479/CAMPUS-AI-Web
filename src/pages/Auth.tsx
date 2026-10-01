@@ -243,7 +243,7 @@ export default function Auth({ defaultMode }: AuthProps) {
             linear-gradient(-45deg, rgba(56, 189, 248, 0.05) 25%, transparent 25%), 
             linear-gradient(45deg, transparent 75%, rgba(56, 189, 248, 0.05) 75%), 
             linear-gradient(-45deg, transparent 75%, rgba(56, 189, 248, 0.05) 75%),
-            url('/logo.png')
+            url('${import.meta.env.BASE_URL}logo.png')
           `,
           backgroundSize: '320px 320px, 320px 320px, 320px 320px, 320px 320px, 120px 120px',
           backgroundPosition: '0 0, 0 160px, 160px -160px, -160px 0, 160px 160px',
@@ -266,7 +266,7 @@ export default function Auth({ defaultMode }: AuthProps) {
             justifyContent: 'center',
             boxShadow: '0 4px 12px rgba(56, 189, 248, 0.2)'
           }}>
-            <img src="/logo.png" alt="DIET Logo" style={{ height: '100%', width: '100%', objectFit: 'contain', borderRadius: '50%' }} />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="DIET Logo" style={{ height: '100%', width: '100%', objectFit: 'contain', borderRadius: '50%' }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontWeight: 800, fontSize: '1.25rem', letterSpacing: '0.05em', fontFamily: 'var(--font-heading)' }}>DIET</span>

@@ -18,7 +18,7 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       <div className="sidebar-brand-wrapper">
         <div className="sidebar-brand">
           <div className="logo-container">
-            <img src="/logo.png" alt="DIET Logo" className="brand-logo" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="DIET Logo" className="brand-logo" />
           </div>
           {!isCollapsed && (
             <div className="brand-text-group">

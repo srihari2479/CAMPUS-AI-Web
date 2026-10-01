@@ -71,11 +71,11 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         {isCollapsed ? (
           <div 
             className="profile-avatar-mini" 
-            title="Click to Sign Out" 
+            title="Abhishek K. (Root Admin) - Click to Sign Out" 
             onClick={() => supabase.auth.signOut()}
           >
             <div className="profile-avatar-container">
-              <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=002147" alt="Avatar" className="user-avatar" />
+              <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=0284c7&textColor=ffffff" alt="Avatar" className="user-avatar" />
               <div className="online-dot"></div>
             </div>
           </div>
@@ -83,12 +83,12 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           <div className="profile-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <div className="profile-avatar-container">
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=002147" alt="Avatar" className="user-avatar" />
+                <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=0284c7&textColor=ffffff" alt="Avatar" className="user-avatar" />
                 <div className="online-dot"></div>
               </div>
               <div className="profile-info">
                 <span className="profile-name">Abhishek K.</span>
-                <span className="profile-role">Root Admin</span>
+                <span className="profile-role" style={{ color: '#38bdf8', fontWeight: 600, fontSize: '0.72rem' }}>Root Admin</span>
               </div>
             </div>
             <button 

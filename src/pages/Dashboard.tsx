@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Database, FileText, Calendar, BookOpen, AlertCircle, RefreshCw, LayoutGrid } from 'lucide-react';
 import { supabase } from '../services/supabase';
+import MultiModelRouterFlow from '../components/MultiModelRouterFlow';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -94,6 +95,9 @@ export default function Dashboard() {
           <span>Note: Connecting to database using local demo mode (Tables not fully migrated yet).</span>
         </div>
       )}
+
+      {/* SOTA Interactive Multi-Model LLM Routing Component */}
+      <MultiModelRouterFlow />
 
       {/* Stats Grid */}
       <div style={{

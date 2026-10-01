@@ -96,10 +96,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* SOTA Interactive Multi-Model LLM Routing Component */}
-      <MultiModelRouterFlow />
-
-      {/* Stats Grid */}
+      {/* TOP ROW: Stats Grid Cards (Image 1 Top Part) */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -175,8 +172,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Content Sections */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+      {/* MIDDLE ROW: System Audit & Ingestion Pipeline Cards (Image 1 Bottom Part) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
         {/* API Gateway Card */}
         <div className="card" style={{ padding: '1.75rem' }}>
           <h3 style={{ marginBottom: '1.25rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem', fontSize: '1.2rem' }}>
@@ -258,6 +255,9 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* BOTTOM ROW: SOTA Interactive Multi-Model LLM Routing Component (Below Image 1!) */}
+      <MultiModelRouterFlow />
     </div>
   );
 }

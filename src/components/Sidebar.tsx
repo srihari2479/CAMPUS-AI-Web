@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, FileText, Calendar, UserCheck, ChevronLeft, ChevronRight, LogOut } from 'lucide-react';
 import { supabase } from '../services/supabase';
@@ -9,6 +10,29 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
+  const [displayName, setDisplayName] = useState<string>('Admin User');
+  const userRole = 'Root Admin';
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        const metaName = user.user_metadata?.full_name || user.user_metadata?.name;
+        if (metaName) {
+          setDisplayName(metaName);
+        } else if (user.email) {
+          const prefix = user.email.split('@')[0];
+          const cleanName = prefix.replace(/[0-9_.-]/g, ' ').trim();
+          if (cleanName.length > 2) {
+            const formattedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+            setDisplayName(formattedName);
+          } else {
+            setDisplayName('Admin User');
+          }
+        }
+      }
+    });
+  }, []);
+
   return (
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <button className="collapse-btn" onClick={onToggle} aria-label="Toggle Sidebar">
@@ -71,24 +95,32 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         {isCollapsed ? (
           <div 
             className="profile-avatar-mini" 
-            title="Abhishek K. (Root Admin) - Click to Sign Out" 
+            title={`${displayName} (${userRole}) - Click to Sign Out`} 
             onClick={() => supabase.auth.signOut()}
           >
             <div className="profile-avatar-container">
-              <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=0284c7&textColor=ffffff" alt="Avatar" className="user-avatar" />
+              <img 
+                src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}&backgroundColor=0284c7&textColor=ffffff`} 
+                alt="Avatar" 
+                className="user-avatar" 
+              />
               <div className="online-dot"></div>
             </div>
           </div>
         ) : (
           <div className="profile-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', overflow: 'hidden' }}>
               <div className="profile-avatar-container">
-                <img src="https://api.dicebear.com/7.x/initials/svg?seed=Abhishek&backgroundColor=0284c7&textColor=ffffff" alt="Avatar" className="user-avatar" />
+                <img 
+                  src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(displayName)}&backgroundColor=0284c7&textColor=ffffff`} 
+                  alt="Avatar" 
+                  className="user-avatar" 
+                />
                 <div className="online-dot"></div>
               </div>
-              <div className="profile-info">
-                <span className="profile-name">Abhishek K.</span>
-                <span className="profile-role" style={{ color: '#38bdf8', fontWeight: 600, fontSize: '0.72rem' }}>Root Admin</span>
+              <div className="profile-info" style={{ overflow: 'hidden' }}>
+                <span className="profile-name" title={displayName}>{displayName}</span>
+                <span className="profile-role" style={{ color: '#38bdf8', fontWeight: 600, fontSize: '0.72rem' }}>{userRole}</span>
               </div>
             </div>
             <button 
@@ -103,7 +135,8 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.2s'
+                transition: 'all 0.2s',
+                flexShrink: 0
               }}
               title="Sign Out"
               onMouseEnter={(e) => {
